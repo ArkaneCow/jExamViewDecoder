@@ -33,6 +33,11 @@ public class ExamViewDecoderJava {
 					e.printStackTrace();
 				} 
 			}
+			if (args[i].startsWith("-src="))
+			{
+				containsURL = true;
+				printAnswerPairs(readSrc(args[i].substring(5))); 
+			}
 			if (args[i].startsWith("-h"))
 			{
 				printHelp();
@@ -52,6 +57,35 @@ public class ExamViewDecoderJava {
 			} 
 		}
 		
+	}
+	public static String readSrc(String path)
+	{
+		File file = new File(path); 
+        StringBuilder contents = new StringBuilder();
+        BufferedReader reader = null;
+ 
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String text = null;
+ 
+            // repeat until all lines is read
+            while ((text = reader.readLine()) != null) {
+                contents.append(text)
+                        .append(System.getProperty(
+                                "line.separator"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return contents.toString(); 
 	}
 	public static void printHelp()
 	{
