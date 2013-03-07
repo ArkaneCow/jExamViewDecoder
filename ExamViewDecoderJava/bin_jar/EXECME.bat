@@ -1,2 +1,1 @@
-java -jar jEVD.jar
-PAUSE
+java ExamViewDecoderJava
